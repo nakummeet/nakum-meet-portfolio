@@ -1,73 +1,99 @@
-# Welcome to your Lovable project
+# Nakum Meet – Portfolio 🚀
 
-## Project info
+A modern developer portfolio built with **React, TypeScript, Tailwind CSS, and Vite**, showcasing my skills, projects, and experience as a **Flutter & Node.js Developer**.
 
-**URL**: https://lovable.dev/projects/33837a60-c1ba-4550-864c-ab143b98cdd6
+🔗 **Live Website:**  
+https://nakum-meet-portfolio.vercel.app/
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 👋 About Me
 
-**Use Lovable**
+I’m **Nakum Meet**, a B.E. student at Government Engineering College, Rajkot.  
+I focus on building **cross-platform mobile apps with Flutter** and **scalable backend APIs using Node.js and MongoDB**.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/33837a60-c1ba-4550-864c-ab143b98cdd6) and start prompting.
+This portfolio highlights my projects, skills, and development approach.
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## 🛠 Tech Stack
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Frontend
+- React
+- TypeScript
+- Tailwind CSS
+- Vite
+- shadcn/ui
+- Radix UI
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Mobile
+- Flutter
+- Dart
 
-Follow these steps:
+### Backend
+- Node.js
+- Express.js
+- MongoDB
+- REST APIs
+
+### Tools
+- Git & GitHub
+- Vercel
+- AI-assisted development
+
+---
+
+## ✨ Features
+
+- Responsive modern UI
+- Clean component-based architecture
+- Smooth animations
+- Project showcase
+- Automatic deployment with Vercel
+
+---
+
+## 📂 Project Structure
+
+
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+├─ components/
+│ ├─ Hero.tsx
+│ ├─ About.tsx
+│ ├─ Services.tsx
+│ ├─ Skills.tsx
+│ ├─ Portfolio.tsx
+│ ├─ Contact.tsx
+│ └─ ui/ # shadcn components
+├─ assets/
+├─ App.tsx
+└─ main.tsx
 ```
 
-**Edit a file directly in GitHub**
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## 🚀 Getting Started (Local Setup)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```bash
+git clone https://github.com/nakummeet/nakum-meet-portfolio.git
+cd nakum-meet-portfolio
+npm install
+npm run dev
+```
+---
+🔄 Deployment
 
-## What technologies are used for this project?
+This project is deployed on Vercel.
+Any push to the main branch triggers automatic redeployment.
+---
+📫 Contact
 
-This project is built with:
+GitHub: https://github.com/nakummeet
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Portfolio: https://nakum-meet-portfolio.vercel.app/
 
-## How can I deploy this project?
+email- nakummeet3570@gmail.com
+---
 
-Simply open [Lovable](https://lovable.dev/projects/33837a60-c1ba-4550-864c-ab143b98cdd6) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
