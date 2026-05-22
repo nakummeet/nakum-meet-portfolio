@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [scrolled, setScrolled] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -14,9 +17,9 @@ const Navigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "about", "skills", "portfolio", "contact"];
-      const scrollPosition = window.scrollY + 100;
-
+      setScrolled(window.scrollY > 20);
+      const sections = ["home", "about", "skills", "services", "portfolio", "contact"];
+      const scrollPosition = window.scrollY + 120;
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -28,99 +31,108 @@ const Navigation = () => {
         }
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navLinks = [
+    { id: "home", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "skills", label: "Skills" },
+    { id: "portfolio", label: "Projects" },
+    { id: "contact", label: "Contact" },
+  ];
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
-      <div className="container mx-auto px-4 py-4">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-background/80 backdrop-blur-xl border-b border-border shadow-lg"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-lg">NM</span>
-            </div>
-            <span className="font-bold text-xl">Nakum Meet</span>
+          {/* Logo */}
+          <button
+            onClick={() => scrollToSection("home")}
+            className="font-mono text-lg font-bold text-primary hover:opacity-80 transition-opacity"
+          >
+            <span className="text-muted-foreground">&lt;</span>
+            NM
+            <span className="text-muted-foreground"> /&gt;</span>
+          </button>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
+                className={`relative text-sm font-medium transition-colors hover:text-primary ${
+                  activeSection === link.id ? "text-primary" : "text-muted-foreground"
+                }`}
+              >
+                {link.label}
+                {activeSection === link.id && (
+                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full" />
+                )}
+              </button>
+            ))}
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
-            <button 
-              onClick={() => scrollToSection("home")} 
-              className={`hover:text-primary transition-colors ${activeSection === "home" ? "text-primary font-semibold" : ""}`}
+          {/* Right side: theme toggle + hire me */}
+          <div className="hidden md:flex items-center gap-3">
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-full border border-border hover:border-primary hover:text-primary transition-all"
+              aria-label="Toggle theme"
             >
-              Home
+              {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
             </button>
-            <button 
-              onClick={() => scrollToSection("about")} 
-              className={`hover:text-primary transition-colors ${activeSection === "about" ? "text-primary font-semibold" : ""}`}
+            <Button
+              onClick={() => scrollToSection("contact")}
+              size="sm"
+              className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90 px-5"
             >
-              About
-            </button>
-            <button 
-              onClick={() => scrollToSection("skills")} 
-              className={`hover:text-primary transition-colors ${activeSection === "skills" ? "text-primary font-semibold" : ""}`}
-            >
-              Skills
-            </button>
-            <button 
-              onClick={() => scrollToSection("portfolio")} 
-              className={`hover:text-primary transition-colors ${activeSection === "portfolio" ? "text-primary font-semibold" : ""}`}
-            >
-              Portfolio
-            </button>
-            <button 
-              onClick={() => scrollToSection("contact")} 
-              className={`hover:text-primary transition-colors ${activeSection === "contact" ? "text-primary font-semibold" : ""}`}
-            >
-              Contact
-            </button>
-            <Button onClick={() => scrollToSection("contact")} className="rounded-full">
               Hire Me
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile: theme toggle + hamburger */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-full border border-border"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+            </button>
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-1">
+              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 flex flex-col gap-4 animate-fade-in">
-            <button 
-              onClick={() => scrollToSection("home")} 
-              className={`text-left hover:text-primary transition-colors ${activeSection === "home" ? "text-primary font-semibold" : ""}`}
+          <div className="md:hidden mt-4 pb-4 flex flex-col gap-3 animate-fade-in border-t border-border pt-4">
+            {navLinks.map((link) => (
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
+                className={`text-left text-sm font-medium transition-colors hover:text-primary ${
+                  activeSection === link.id ? "text-primary" : "text-muted-foreground"
+                }`}
+              >
+                {link.label}
+              </button>
+            ))}
+            <Button
+              onClick={() => scrollToSection("contact")}
+              size="sm"
+              className="rounded-full w-full mt-2"
             >
-              Home
-            </button>
-            <button 
-              onClick={() => scrollToSection("about")} 
-              className={`text-left hover:text-primary transition-colors ${activeSection === "about" ? "text-primary font-semibold" : ""}`}
-            >
-              About
-            </button>
-            <button 
-              onClick={() => scrollToSection("skills")} 
-              className={`text-left hover:text-primary transition-colors ${activeSection === "skills" ? "text-primary font-semibold" : ""}`}
-            >
-              Skills
-            </button>
-            <button 
-              onClick={() => scrollToSection("portfolio")} 
-              className={`text-left hover:text-primary transition-colors ${activeSection === "portfolio" ? "text-primary font-semibold" : ""}`}
-            >
-              Portfolio
-            </button>
-            <button 
-              onClick={() => scrollToSection("contact")} 
-              className={`text-left hover:text-primary transition-colors ${activeSection === "contact" ? "text-primary font-semibold" : ""}`}
-            >
-              Contact
-            </button>
-            <Button onClick={() => scrollToSection("contact")} className="rounded-full w-full">
               Hire Me
             </Button>
           </div>
