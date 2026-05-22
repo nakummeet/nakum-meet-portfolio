@@ -86,29 +86,41 @@ const projects: Project[] = [
   // ── OTHER ──
   {
     category: "other",
-    title: "Portfolio Website",
+    title: "AICodeBridge",
     description:
-      "This very portfolio — built with React, TypeScript, and Tailwind CSS. Dark/light mode, smooth animations, and auto-deployed on Vercel on every push.",
+      "A VS Code extension that analyzes codebases and generates AI-ready project context for ChatGPT, Claude, Gemini, and other AI tools. Includes smart tech-stack detection, error analysis, file selection, git history integration, and one-click AI sharing workflows.",
+
     image: null,
-    tech: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-    github: "https://github.com/nakummeet/nakum-meet-portfolio",
-    live: "https://nakum-meet-portfolio.vercel.app",
-    status: "live",
-    gradient: "from-violet-500/20 via-purple-500/10 to-transparent",
+
+    tech: [
+      "TypeScript",
+      "VS Code API",
+      "Node.js",
+      "AI Workflow",
+      "Markdown",
+    ],
+
+    github: "https://github.com/nakummeet/ai-context-manager",
+
+    live: null,
+
+
+
+    gradient: "from-primary/20 via-primary/5 to-transparent",
   },
 ];
 
 const tabs: { key: Category | "all"; label: string; emoji: string }[] = [
-  { key: "all",     label: "All",     emoji: "🗂️" },
-  { key: "app",     label: "Mobile Apps", emoji: "📱" },
+  { key: "all", label: "All", emoji: "🗂️" },
+  { key: "app", label: "Mobile Apps", emoji: "📱" },
   { key: "backend", label: "Backend", emoji: "🌐" },
-  { key: "other",   label: "Other",   emoji: "💻" },
+  { key: "other", label: "Other", emoji: "💻" },
 ];
 
 const statusBadge: Record<string, { label: string; cls: string }> = {
-  live: { label: "Live",       cls: "bg-green-500/15 text-green-400 border-green-500/30" },
-  done: { label: "Completed",  cls: "bg-primary/15 text-primary border-primary/30" },
-  wip:  { label: "In Progress",cls: "bg-yellow-500/15 text-yellow-400 border-yellow-500/30" },
+  live: { label: "Live", cls: "bg-green-500/15 text-green-400 border-green-500/30" },
+  done: { label: "Completed", cls: "bg-primary/15 text-primary border-primary/30" },
+  wip: { label: "In Progress", cls: "bg-yellow-500/15 text-yellow-400 border-yellow-500/30" },
 };
 
 const Portfolio = () => {
@@ -136,11 +148,10 @@ const Portfolio = () => {
             <button
               key={tab.key}
               onClick={() => setActive(tab.key)}
-              className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium border transition-all duration-200 ${
-                active === tab.key
+              className={`flex items-center gap-2 px-5 py-2 rounded-full text-sm font-medium border transition-all duration-200 ${active === tab.key
                   ? "bg-primary text-primary-foreground border-primary"
                   : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-              }`}
+                }`}
             >
               <span>{tab.emoji}</span>
               {tab.label}
@@ -170,8 +181,8 @@ const Portfolio = () => {
                 ) : (
                   <div className={`w-full h-full flex items-center justify-center bg-gradient-to-br ${project.gradient} bg-secondary/10`}>
                     <span className="text-5xl font-bold font-mono text-primary/20 select-none">
-                      {project.category === "app"     ? "📱" :
-                       project.category === "backend" ? "🌐" : "</>"}
+                      {project.category === "app" ? "📱" :
+                        project.category === "backend" ? "🌐" : "</>"}
                     </span>
                   </div>
                 )}
