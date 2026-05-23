@@ -5,7 +5,7 @@ import {
   Mail,
 } from "lucide-react";
 
-import profileHero from "@/assets/profile-hero.jpeg";
+import profileHero from "@/assets/profile-hero.jpg";
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
